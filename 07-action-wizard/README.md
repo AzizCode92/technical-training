@@ -2,42 +2,43 @@
 
 ## Goal
 
-- return action from a butto, add an action in more menu
+- return action from a button, add an action in more menu
 - create wizard
-- stat button
+- stat/smart button
 
 ## Requirements
 
 
-* [01](https://www.python.org/)
-* [02](https://www.python.org/)
-* [03](https://www.python.org/)
+- [Models, Fields and Relations](../01-models)
+- [Computed Fields, Onchange and Constraints](../02-fields)
+- [Basic Views](../03-views)
 
 ## Problem 1: The Citadel (OpenAcademy)
 
+In order to see who followed a course, we want to add a smart button on the `course`
+form to see the amount of participants and when and redirect to the list of participant
+of any `session`.
 
+Also, to accelerate the registration to a session, from the the `res.partner` tree view,
+you can select participant and add them in a session in the `more` via a wizard to select
+the correct session.
 
 ## Problem 02: Library Management
 
-
-
-## Problem 03: Cooperative Volunteers 
+The librarian want to see who has ever rented a book as well as the count directly on
+the book form via a smart button. Also he wants to be able to select books to create a rental
+for a `res.partner` via a 2 level wizard:
+* Level 1: select books
+* Level 2: Select partner and see all the books he rented
 
 
 ## Resources
 
 ### Reference
 
-* [Activate Debug Mode](https://www.odoo.com/documentation/9.0/howtos/web.html#a-simple-module)
-* [Models Documentation](http://www.odoo.com/documentation/9.0/reference/orm.html#model-reference)
-* [Basic Fields Documentation](http://www.odoo.com/documentation/9.0/reference/orm.html#basic-fields)
-* [Relational Fields Documentation](http://www.odoo.com/documentation/9.0/reference/orm.html##relational-fields)
-* [Online Tutorial](http://www.odoo.com/documentation/9.0/howtos/backend.html#build-an-odoo-module)
+* [Wizard](https://www.odoo.com/documentation/10.0/howtos/backend.html#wizards)
+* [Launching wizard](https://www.odoo.com/documentation/10.0/howtos/backend.html#launching-wizards)
 
 ### Code Sample
 
-* [API stuff to import](https://github.com/odoo/odoo/blob/76c443eda331b75bf5dfa7ec22b8eb22e1084343/odoo/addons/base/res/res_bank.py#L5)
-* [Simple model with some basic fields](https://github.com/odoo/odoo/blob/76c443eda331b75bf5dfa7ec22b8eb22e1084343/odoo/addons/base/res/res_bank.py#L15)
-* [Many2one](https://github.com/odoo/odoo/blob/76c443eda331b75bf5dfa7ec22b8eb22e1084343/addons/sale/models/sale.py#L701)
-* [One2many](https://github.com/odoo/odoo/blob/76c443eda331b75bf5dfa7ec22b8eb22e1084343/addons/sale/models/sale.py#L128)
-* [Many2many](https://github.com/odoo/odoo/blob/76c443eda331b75bf5dfa7ec22b8eb22e1084343/addons/account/models/product.py#L25)
+* [Return action in Python](https://github.com/odoo/odoo/blob/10.0/addons/mrp_repair/wizard/mrp_repair_make_invoice.py#L26)

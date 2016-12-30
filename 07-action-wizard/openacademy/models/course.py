@@ -13,6 +13,7 @@ class Course(models.Model):
     session_ids = fields.One2many('openacademy.session', 'course_id', string="Sessions")
     level = fields.Selection([(1, 'Easy'), (2, 'Medium'), (3, 'Hard')], string="Difficulty Level")
     session_count = fields.Integer("Session Count", compute="_compute_session_count")
+    attendee_count = fields.Integer("Attendee Count", compute="_compute_attendee_count")
 
     _sql_constraints = [
        ('name_description_check', 'CHECK(name != description)',
@@ -36,10 +37,28 @@ class Course(models.Model):
         default['name'] = new_name
         return super(Course, self).copy(default)
 
+    @api.multi
+    def open_attendees(self):
+        self.ensure_one()
+        attendee_ids = self.session_ids.mapped('attendee_ids')
+        return {
+            'name': 'Attached seances',
+            'type': 'ir.actions.act_window',
+            'res_model': 'res.partner',
+            'view_mode': 'tree,form',
+            'view_type': 'form',
+            'domain': [('id', 'in', attendee_ids.ids)],
+        }
+
     @api.depends('session_ids')
     def _compute_session_count(self):
         for course in self:
             course.session_count = len(course.session_ids)
+
+    @api.depends('session_ids.attendees_count')
+    def _compute_attendee_count(self):
+        for course in self:
+            course.attendee_count = sum(course.session_ids.mapped('attendees_count'))
 
 
 class Session(models.Model):
